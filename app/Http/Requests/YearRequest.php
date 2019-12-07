@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class YearRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'year' => ['required', 'numeric', function ($attribute, $value, $fail) {
+                if ($value % 4 != 0 ) $fail($attribute ." ". $value. " not a leap year");
+
+
+
+            }]
+        ];
+    }
+}
